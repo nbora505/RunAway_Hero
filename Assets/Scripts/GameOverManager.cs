@@ -8,6 +8,8 @@ public class GameOverManager : MonoBehaviour
     public GameObject gameOverPanel;
     public CameraMoving cameraMoving;
 
+    public bool isDead;
+
     void Start()
     {
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
@@ -20,11 +22,14 @@ public class GameOverManager : MonoBehaviour
 
     public IEnumerator PlayerDeath(float delay)
     {
+        isDead = true;
+
         yield return new WaitForSeconds(delay);
-        player.SetActive(false);
+        player.SetActive(false); //이거 수정 바람
         cameraMoving.speed = 0;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("돼는디?");
         gameOverPanel.SetActive(true);
 
     }

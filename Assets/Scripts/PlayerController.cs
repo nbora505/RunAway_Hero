@@ -146,8 +146,7 @@ public class PlayerController : MonoBehaviour
             isBlock = false;
             Debug.Log(dir.x+", "+ dir.y + ", " + dir.z);
             hitPos = null;
-        }
-       
+        }     
     }
 
     public void MoveTile()
@@ -170,7 +169,7 @@ public class PlayerController : MonoBehaviour
             if (hitPos == null)
             {
                 Debug.Log("게임 오버!!!");
-                StartCoroutine(gameOverManager.PlayerDeath(0.5f));
+                StartCoroutine(gameOverManager.PlayerDeath(0.1f));
             }
         }
     }

@@ -1248,6 +1248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1024624192}
   gameOverPanel: {fileID: 12446800}
+  cameraMoving: {fileID: 0}
+  isDead: 0
 --- !u!4 &908202148
 Transform:
   m_ObjectHideFlags: 0

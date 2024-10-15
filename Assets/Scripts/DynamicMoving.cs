@@ -10,10 +10,13 @@ public class DynamicMoving : MonoBehaviour
     public PlayerController playerController;
     public CameraMoving cameraMoving;
     public EnemyController enemyController;
+    public GameOverManager gameOverManager;
 
     void Start()
-    {
-        if (playerController != null)
+    {   
+        gameOverManager = GameObject.Find("GameOverMgr").GetComponent<GameOverManager>();
+
+        if(!gameOverManager.GetComponent<GameOverManager>().isDead)
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
         enemyController = GetComponentInParent<EnemyController>();
