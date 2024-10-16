@@ -10,6 +10,7 @@ public class EnemyMaker : MonoBehaviour
 
     public GameObject enemyPrefab;
     public GameObject enemy;
+    public GameObject warning;
 
     public int[] enemyPos = new int[4];
     public int enemyCnt;
@@ -90,8 +91,16 @@ public class EnemyMaker : MonoBehaviour
         }
         if(tileType == 2)
         {
+            if (curTime >= 10f && curTime < 11f)
+            {
+                //°æ°í
+                warning.SetActive(true);
+            }
+
             if (curTime >= 11f && curTime < 12f)
             {
+                warning.SetActive(false);
+
                 miniCurTime += Time.deltaTime;
                 if (miniCurTime > enemyCool)
                 {

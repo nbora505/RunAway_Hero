@@ -37,89 +37,100 @@ public class PlayerController : MonoBehaviour
     public bool isOnFloor;
 
     public GameOverManager gameOverManager;
+    public GameManager gameManager;
 
     void Start()
     {
         tileMaker = GameObject.Find("TileMaker").GetComponent<TileMaker>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
-        gameOverManager = GameObject.Find("GameOverMgr").GetComponent<GameOverManager>();
+        gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
+        gameManager = GameObject.Find("GameMgr").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        transform.position = new Vector3(currentX, 0, currentZ);
+        if (gameManager.gameStart)
+        {
+            transform.position = new Vector3(currentX, 0, currentZ);
 
-        if (!isMoving)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (!isMoving)
             {
-                CheckOthers(Vector3.left);
-                if (!isBlock)
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    playerCharacter.localRotation = Quaternion.Euler(0, -90f, 0);
-                    originX = transform.position.x;
-                    cameraMoving.originX = cameraMoving.transform.position.x;
-                    isMoving = true;
-                    dir = direction.LEFT;
+                    CheckOthers(Vector3.left);
+                    if (!isBlock)
+                    {
+                        playerCharacter.localRotation = Quaternion.Euler(0, -90f, 0);
+                        originX = transform.position.x;
+                        cameraMoving.originX = cameraMoving.transform.position.x;
+                        isMoving = true;
+                        dir = direction.LEFT;
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                CheckOthers(Vector3.right);
-                if (!isBlock)
-                {             
-                    playerCharacter.localRotation = Quaternion.Euler(0, 90f, 0);
-                    originX = transform.position.x;
-                    cameraMoving.originX = cameraMoving.transform.position.x;
-                    isMoving = true;
-                    dir = direction.RIGHT;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                CheckOthers(Vector3.forward);
-                if(!isBlock)
+                if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    playerCharacter.localRotation = Quaternion.Euler(0, 0, 0);
-                    z1 = tileMover.transform.position.z;
-                    originZ = transform.position.z;
-                    isMoving = true;
-                    dir = direction.FRONT;
+                    CheckOthers(Vector3.right);
+                    if (!isBlock)
+                    {
+                        playerCharacter.localRotation = Quaternion.Euler(0, 90f, 0);
+                        originX = transform.position.x;
+                        cameraMoving.originX = cameraMoving.transform.position.x;
+                        isMoving = true;
+                        dir = direction.RIGHT;
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                CheckOthers(Vector3.back);
-                if (!isBlock)
+                if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    playerCharacter.localRotation = Quaternion.Euler(0, 180f, 0);
-                    originZ = transform.position.z;
-                    isMoving = true;
-                    dir = direction.BACK;
+                    CheckOthers(Vector3.forward);
+                    if (!isBlock)
+                    {
+                        playerCharacter.localRotation = Quaternion.Euler(0, 0, 0);
+                        z1 = tileMover.transform.position.z;
+                        originZ = transform.position.z;
+                        isMoving = true;
+                        dir = direction.FRONT;
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    CheckOthers(Vector3.back);
+                    if (!isBlock)
+                    {
+                        playerCharacter.localRotation = Quaternion.Euler(0, 180f, 0);
+                        originZ = transform.position.z;
+                        isMoving = true;
+                        dir = direction.BACK;
+                    }
                 }
             }
-        }
-        else
-        {
-            switch (dir)
+            else
             {
-                case direction.FRONT:
-                    if (currentZ < 0) MoveFront();
-                    else MoveTile();
-                    break;
-                case direction.LEFT:
-                    cameraMoving.MoveCameraLeft();
-                    MoveLeft();
-                    break;
-                case direction.RIGHT:
-                    cameraMoving.MoveCameraRight();
-                    MoveRight();
-                    break;
-                case direction.BACK:
-                    MoveBack();
-                    break;
-                default:
-                    break;
+                switch (dir)
+                {
+                    case direction.FRONT:
+                        if (currentZ < 0) MoveFront();
+                        else MoveTile();
+                        break;
+                    case direction.LEFT:
+                        cameraMoving.MoveCameraLeft();
+                        MoveLeft();
+                        break;
+                    case direction.RIGHT:
+                        cameraMoving.MoveCameraRight();
+                        MoveRight();
+                        break;
+                    case direction.BACK:
+                        MoveBack();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if(currentX >=5f || currentX <= -5f)
+            {
+                Debug.Log("게임 오버!!!");
+                StartCoroutine(gameOverManager.PlayerDeath(0.1f));
             }
         }
     }
@@ -258,4 +269,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision coll)
+    {
+        if(coll.gameObject.tag == "Enemy")
+        {
+            StartCoroutine(gameOverManager.PlayerDeath(0.1f));
+        }
+    }
 }

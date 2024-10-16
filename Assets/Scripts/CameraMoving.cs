@@ -17,24 +17,36 @@ public class CameraMoving : MonoBehaviour
 
     public PlayerController playerController;
     public DynamicMoving dynamicMoving;
-
+    public GameManager gameManager;
+    public GameOverManager gameOverManager;
     void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.Find("GameMgr").GetComponent<GameManager>();
+        gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
     }
 
     void Update()
     {
-        currentZ = transform.position.z;
-        transform.position = new Vector3(currentX, 0, currentZ);
+        if (gameManager.gameStart)
+        {
+            currentZ = transform.position.z;
+            transform.position = new Vector3(currentX, 0, currentZ);
 
-        if (isMoving)
-        {
-            MoveCamera();
-        }
-        else
-        {
-            ReturnCamera();
+            if (isMoving)
+            {
+                MoveCamera();
+            }
+            else
+            {
+                ReturnCamera();
+            }
+
+            if(currentZ >= 3f)
+            {
+                Debug.Log("게임 오버!!!");
+                StartCoroutine(gameOverManager.TimeOutDeath(0.1f));
+            }
         }
     }
 

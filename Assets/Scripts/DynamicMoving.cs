@@ -14,7 +14,7 @@ public class DynamicMoving : MonoBehaviour
 
     void Start()
     {   
-        gameOverManager = GameObject.Find("GameOverMgr").GetComponent<GameOverManager>();
+        gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
 
         if(!gameOverManager.GetComponent<GameOverManager>().isDead)
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -30,7 +30,7 @@ public class DynamicMoving : MonoBehaviour
 
     private void OnCollisionStay(Collision coll)
     {
-        if (coll.collider.tag == "Player")
+        if (coll.collider.tag == "Player" && !gameOverManager.isDead)
         {
             //Debug.Log("Ãæµ¹!");
             playerController.isOnFloor = true;
@@ -41,7 +41,7 @@ public class DynamicMoving : MonoBehaviour
     }
     private void OnCollisionExit(Collision coll)
     {
-        if (coll.collider.tag == "Player")
+        if (coll.collider.tag == "Player" && !gameOverManager.isDead)
         {
             float round = Mathf.Round(transform.position.x);
             Debug.Log(round);

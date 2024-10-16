@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3299505025381914741}
   m_Layer: 0
   m_Name: Floor_Static
-  m_TagString: Enemy
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
