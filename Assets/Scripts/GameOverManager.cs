@@ -26,7 +26,7 @@ public class GameOverManager : MonoBehaviour
         Debug.Log("Æã!!!!!!!!");
         cameraMoving.speed = 0;
         GetComponent<GameManager>().gameStart = false;
-        playerCharacter.SetActive(false);
+        //playerCharacter.gameObject.transform.GetComponent<MeshRenderer>().enabled = false;
 
         yield return new WaitForSeconds(1f);
 

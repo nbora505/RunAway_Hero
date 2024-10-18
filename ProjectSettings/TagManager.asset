@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - TileBlock
   - Block
+  - Character
   layers:
   - Default
   - TransparentFX

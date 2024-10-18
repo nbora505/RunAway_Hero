@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerCharacter = GameObject.FindGameObjectWithTag("Character").gameObject.transform;
         tileMaker = GameObject.Find("TileMaker").GetComponent<TileMaker>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
         gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
