@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +25,14 @@ public class GameManager : MonoBehaviour
     public bool gameStart;
     public int panelState;
 
+    public Slider cntBar;
+    public Text scoreText;
+    public Text topScoreText;
+    public Text coinText;
+    public Text characterCountText;
+    public CharacterManager characterManager;
+    public GameObject win_character;
+
     void Start()
     {
         anim1 = startPanel.GetComponent<Animator>();
@@ -35,7 +46,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        scoreText.text = "" + ScoreManager.Instance().myScore;
+        topScoreText.text = "TOP:" + ScoreManager.Instance().bestScore;
+        coinText.text = "" + ScoreManager.Instance().coin;
 
+        cntBar.value = (float)characterManager.characterCnt / 14;
+        characterCountText.text = characterManager.characterCnt + " / 14";
     }
 
     public void OnGachaBackBtn()
@@ -78,6 +94,15 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(true);
         anim1.SetTrigger("reStart");
         StartCoroutine(WaitBeforeLoadScene(1f));
+    }
+    public void CardSelect()
+    {
+        Win_Character win_Character = win_character.GetComponent<Win_Character>();
+        GameObject clickObject = EventSystem.current.currentSelectedGameObject;
+        win_Character.curChar = int.Parse(clickObject.name);
+        Debug.Log(win_Character.curChar);
+        
+        win_character.SetActive(true);
     }
 
     IEnumerator WaitBeforeLoadScene(float time)

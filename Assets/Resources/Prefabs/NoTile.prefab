@@ -53,6 +53,7 @@ MonoBehaviour:
   makerPos: 0
   enemyPrefab: {fileID: 0}
   enemy: {fileID: 0}
+  warning: {fileID: 0}
   enemyPos: 
   enemyCnt: 0
   enemyType: 0
@@ -62,6 +63,7 @@ MonoBehaviour:
   curTime: 0
   tileMaker: {fileID: 0}
   tileType: 0
+  coin: {fileID: 5995811486012685645, guid: 288b3d902c9ead24ba505982816bb59f, type: 3}
 --- !u!33 &1950622670589600743
 MeshFilter:
   m_ObjectHideFlags: 0

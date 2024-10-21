@@ -63,6 +63,7 @@ MonoBehaviour:
   curTime: 0
   tileMaker: {fileID: 0}
   tileType: 0
+  coin: {fileID: 5995811486012685645, guid: 288b3d902c9ead24ba505982816bb59f, type: 3}
 --- !u!114 &-6789074944486988827
 MonoBehaviour:
   m_ObjectHideFlags: 0

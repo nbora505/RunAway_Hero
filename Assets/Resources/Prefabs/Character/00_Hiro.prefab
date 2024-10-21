@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2852857088205454250}
   - component: {fileID: 2487893196934151364}
   m_Layer: 0
-  m_Name: 01_Hiro
+  m_Name: 00_Hiro
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

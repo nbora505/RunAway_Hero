@@ -38,14 +38,21 @@ public class PlayerController : MonoBehaviour
 
     public GameOverManager gameOverManager;
     public GameManager gameManager;
+    public ScoreManager scoreManager;
+    public CharacterManager characterManager;
 
     void Start()
     {
-        playerCharacter = GameObject.FindGameObjectWithTag("Character").gameObject.transform;
+        playerCharacter = GameObject.FindGameObjectWithTag("Character").GetComponent<Transform>();
         tileMaker = GameObject.Find("TileMaker").GetComponent<TileMaker>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
         gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
         gameManager = GameObject.Find("GameMgr").GetComponent<GameManager>();
+        scoreManager = GameObject.Find("ScoreMgr").GetComponent<ScoreManager>();
+        characterManager = GameObject.Find("CharacterMgr").GetComponent<CharacterManager>();
+
+        //int curChar = characterManager.curChar;
+        //playerCharacter = Resources.Load("Prefabs/Character/" + curChar) as GameObject;
     }
 
     void Update()
@@ -177,10 +184,11 @@ public class PlayerController : MonoBehaviour
 
             tileMaker.MakeTile();
             tileMoving = false;
+            scoreManager.myScore++;
 
             if (hitPos == null)
             {
-                Debug.Log("게임 오버!!!");
+                Debug.Log("추락!!!");
                 StartCoroutine(gameOverManager.PlayerDeath(0.1f));
             }
         }
@@ -193,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
         if (hitPos == null) 
         {
-            Debug.Log("게임 오버!!!");
+            Debug.Log("추락!!!");
             StartCoroutine(gameOverManager.PlayerDeath(0.5f));
         }
         else
@@ -215,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
         if (hitPos == null)
         {
-            Debug.Log("게임 오버!!!");
+            Debug.Log("추락!!!");
             StartCoroutine(gameOverManager.PlayerDeath(0.5f));
         }
         else
@@ -236,7 +244,7 @@ public class PlayerController : MonoBehaviour
 
         if (hitPos == null)
         {
-            Debug.Log("게임 오버!!!");
+            Debug.Log("추락!!!");
             StartCoroutine(gameOverManager.PlayerDeath(0.5f));
         }
         else
@@ -256,7 +264,7 @@ public class PlayerController : MonoBehaviour
 
         if (hitPos == null)
         {
-            Debug.Log("게임 오버!!!");
+            Debug.Log("추락!!!");
             StartCoroutine(gameOverManager.PlayerDeath(0.5f));
         }
         else

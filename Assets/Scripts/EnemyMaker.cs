@@ -25,6 +25,8 @@ public class EnemyMaker : MonoBehaviour
     public TileMaker tileMaker;
     public int tileType;
 
+    public GameObject coin;
+
     void Awake()
     {
 
@@ -68,7 +70,17 @@ public class EnemyMaker : MonoBehaviour
             SetEnemySpd();
             SetEnemyCool();
         }
-        
+
+        int coinGen = Random.Range(0, 8);
+        if (coinGen == 0 && tileType != 3)
+        {
+            int coinPos = Random.Range(0, 9);
+            coin = Instantiate(coin, new Vector3((coinPos -4), 0, transform.position.z), Quaternion.identity, transform);
+            coin.transform.parent = null;
+            coin.transform.localScale = new Vector3(1f, 1f, 1f);
+            coin.transform.parent = this.transform;
+        }
+
     }
     
     void Update()

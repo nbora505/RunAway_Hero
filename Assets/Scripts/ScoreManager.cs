@@ -18,10 +18,22 @@ public class ScoreManager : MonoBehaviour
             _instance = this;
         }
         LoadBestScore();
+        LoadCoin();
     }
 
     int _bestScore = 0;
     int _myScore = 0;
+    int _coin = 0;
+
+    public int coin
+    {
+        get { return _coin; }
+        set
+        {
+            _coin = value;
+            SaveCoin();
+        }
+    }
 
     public int bestScore
     {
@@ -40,6 +52,14 @@ public class ScoreManager : MonoBehaviour
                 Debug.Log("최고점수 갱신 ::: " + _bestScore);
             }
         }
+    }
+    void SaveCoin()
+    {
+        PlayerPrefs.SetInt("Coin", _coin);
+    }
+    void LoadCoin()
+    {
+        _coin = PlayerPrefs.GetInt("Coin");
     }
     void SaveBestScore()
     {
