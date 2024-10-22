@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     Transform hitPos;
 
     public direction dir;
-    public Transform playerCharacter;
+    public GameObject playerCharacter;
     public GameObject tileMover;
     public float speed = 5f;
     public bool isMoving = false;
@@ -41,18 +41,29 @@ public class PlayerController : MonoBehaviour
     public ScoreManager scoreManager;
     public CharacterManager characterManager;
 
+    private string[] characterPrefabs = { "00_Hiro", "01_Suhyeok", "02_Tanya", "03_Carmen", "04_Miju", "05_Mir", "06_Dasu", "07_Theo", "08_Philemon", "09_Cloudia", "10_Noah", "11_Altair", "12_Ceres", "13_Rant" };
+
     void Start()
     {
-        playerCharacter = GameObject.FindGameObjectWithTag("Character").GetComponent<Transform>();
+        int curChar = characterManager.curChar;
+        string prefabPath = $"Prefabs/Character/{characterPrefabs[curChar]}";
+        GameObject characterPrefab = Resources.Load(prefabPath) as GameObject;
+
+        if (characterPrefab != null)
+        {           
+            playerCharacter = Instantiate(characterPrefab, transform.position, Quaternion.identity);
+
+            playerCharacter.transform.SetParent(transform);
+            playerCharacter.transform.localPosition = Vector3.zero;
+            playerCharacter.transform.localRotation = Quaternion.identity;
+        }
+
         tileMaker = GameObject.Find("TileMaker").GetComponent<TileMaker>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
         gameOverManager = GameObject.Find("GameMgr").GetComponent<GameOverManager>();
         gameManager = GameObject.Find("GameMgr").GetComponent<GameManager>();
         scoreManager = GameObject.Find("ScoreMgr").GetComponent<ScoreManager>();
         characterManager = GameObject.Find("CharacterMgr").GetComponent<CharacterManager>();
-
-        //int curChar = characterManager.curChar;
-        //playerCharacter = Resources.Load("Prefabs/Character/" + curChar) as GameObject;
     }
 
     void Update()
@@ -68,7 +79,7 @@ public class PlayerController : MonoBehaviour
                     CheckOthers(Vector3.left);
                     if (!isBlock)
                     {
-                        playerCharacter.localRotation = Quaternion.Euler(0, -90f, 0);
+                        playerCharacter.transform.localRotation = Quaternion.Euler(0, -90f, 0);
                         originX = transform.position.x;
                         cameraMoving.originX = cameraMoving.transform.position.x;
                         isMoving = true;
@@ -80,7 +91,7 @@ public class PlayerController : MonoBehaviour
                     CheckOthers(Vector3.right);
                     if (!isBlock)
                     {
-                        playerCharacter.localRotation = Quaternion.Euler(0, 90f, 0);
+                        playerCharacter.transform.localRotation = Quaternion.Euler(0, 90f, 0);
                         originX = transform.position.x;
                         cameraMoving.originX = cameraMoving.transform.position.x;
                         isMoving = true;
@@ -92,7 +103,7 @@ public class PlayerController : MonoBehaviour
                     CheckOthers(Vector3.forward);
                     if (!isBlock)
                     {
-                        playerCharacter.localRotation = Quaternion.Euler(0, 0, 0);
+                        playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
                         z1 = tileMover.transform.position.z;
                         originZ = transform.position.z;
                         isMoving = true;
@@ -104,7 +115,7 @@ public class PlayerController : MonoBehaviour
                     CheckOthers(Vector3.back);
                     if (!isBlock)
                     {
-                        playerCharacter.localRotation = Quaternion.Euler(0, 180f, 0);
+                        playerCharacter.transform.localRotation = Quaternion.Euler(0, 180f, 0);
                         originZ = transform.position.z;
                         isMoving = true;
                         dir = direction.BACK;

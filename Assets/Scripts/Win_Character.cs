@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Win_Character : MonoBehaviour
 {
     public CharacterManager characterMgr;
+    public GameManager gameMgr;
     public string[] characterName = new string[14];
     public string[] characterDescription = new string[14];
 
@@ -19,6 +20,7 @@ public class Win_Character : MonoBehaviour
     void Start()
     {
         characterMgr = GameObject.Find("CharacterMgr").GetComponent<CharacterManager>();
+        gameMgr = GameObject.Find("GameMgr").GetComponent<GameManager>();
         SetCharacterList();
     }
 
@@ -32,6 +34,8 @@ public class Win_Character : MonoBehaviour
         Win_Character win_Character = GetComponent<Win_Character>();
         characterMgr.curChar = win_Character.curChar;
         Debug.Log(characterMgr.curChar);
+
+        gameMgr.OnReStartBtn();
 
 }
     public void RBtn()

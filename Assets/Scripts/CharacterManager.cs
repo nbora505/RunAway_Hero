@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     static CharacterManager _instance;
+    public ScoreManager scoreManager;
 
     public static CharacterManager Instance()
     {
@@ -19,6 +20,9 @@ public class CharacterManager : MonoBehaviour
     public GameObject result;
 
     public int characterCnt;
+
+    public GameManager gameMgr;
+    public GameObject cautionPanel;
 
     void Start()
     {
@@ -85,13 +89,34 @@ public class CharacterManager : MonoBehaviour
         _curChar = PlayerPrefs.GetInt("CurrentChararacter");
     }
 
-    public void Gacha()
+    public void RandomSelect()
     {
         int rand = Random.Range(0, 14);
-        _characters[rand] = 1;
-        SaveCharacter();
+        if (_characters[rand] == 0) RandomSelect();
+        else
+        {
+            Debug.Log(rand);
+            curChar = rand;
+            gameMgr.OnReStartBtn();
+        }
+    }
 
-        StartCoroutine(GachaEffect(rand));
+    public void Gacha()
+    {
+        if (scoreManager.coin >= 100)
+        {
+            int rand = Random.Range(0, 14);
+            _characters[rand] = 1;
+            SaveCharacter();
+
+            scoreManager.coin -= 100;
+
+            StartCoroutine(GachaEffect(rand));
+        }
+        else
+        {
+            cautionPanel.SetActive(true);
+        }
     }
 
     public IEnumerator GachaEffect(int rand)

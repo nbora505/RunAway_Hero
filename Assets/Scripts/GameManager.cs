@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject shopPanel;
     public GameObject win_gacha;
     public GameObject win_gacha_result;
+    public GameObject optionPanel;
 
     public bool gameStart;
     public int panelState;
@@ -52,6 +54,17 @@ public class GameManager : MonoBehaviour
 
         cntBar.value = (float)characterManager.characterCnt / 14;
         characterCountText.text = characterManager.characterCnt + " / 14";
+    }
+
+    public void OnOptionBtn()
+    {
+        optionPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void OnCloseOptionBtn()
+    {
+        optionPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void OnGachaBackBtn()
@@ -116,5 +129,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Debug.Log("´ë±â");
+    }
+    public void OnExitBtn()
+    {
+        Application.Quit();
     }
 }

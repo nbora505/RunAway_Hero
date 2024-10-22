@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
@@ -7,14 +8,17 @@ public class GameOverManager : MonoBehaviour
     public GameObject player;
     public GameObject gameOverPanel;
     public CameraMoving cameraMoving;
-    public GameObject playerCharacter;
+    public PlayerController playerController;
     public GameObject monster;
+
+    public GameObject gameOverEffect;
 
     public bool isDead;
 
     void Start()
     {
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     public IEnumerator PlayerDeath(float delay)
@@ -23,10 +27,10 @@ public class GameOverManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         //Æø¹ß ÀÌÆåÆ®
-        Debug.Log("Æã!!!!!!!!");
+        GameObject Spark = Instantiate<GameObject>(gameOverEffect, player.transform);
         cameraMoving.speed = 0;
         GetComponent<GameManager>().gameStart = false;
-        //playerCharacter.gameObject.transform.GetComponent<MeshRenderer>().enabled = false;
+        playerController.playerCharacter.GetComponent<MeshRenderer>().enabled = false;
 
         yield return new WaitForSeconds(1f);
 

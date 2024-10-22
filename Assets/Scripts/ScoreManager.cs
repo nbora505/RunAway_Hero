@@ -53,6 +53,11 @@ public class ScoreManager : MonoBehaviour
             }
         }
     }
+    public void GetCoinToAd()
+    {
+        coin += 20;
+    }
+
     void SaveCoin()
     {
         PlayerPrefs.SetInt("Coin", _coin);
