@@ -30,7 +30,7 @@ public class GameOverManager : MonoBehaviour
         GameObject Spark = Instantiate<GameObject>(gameOverEffect, player.transform);
         cameraMoving.speed = 0;
         GetComponent<GameManager>().gameStart = false;
-        playerController.playerCharacter.GetComponent<MeshRenderer>().enabled = false;
+        playerController.playerCharacter.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 

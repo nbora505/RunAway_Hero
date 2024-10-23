@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public float enemySpd;
     public int enemyType;
     public int tileType;
+    public int enemyDir;
 
     public Transform[] floorX;
 
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
         enemySpd = enemyMaker.enemySpd;
         enemyType = enemyMaker.enemyType;
         tileType = enemyMaker.tileType;
+        enemyDir = enemyMaker.enemyDir;
 
         if(tileType == 4)
         {
@@ -32,11 +34,11 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (enemyMaker.enemyDir == 0) 
+        if (enemyDir == 0) 
         {
             transform.Translate(enemySpd * Time.deltaTime, 0, 0);
         }
-        else if (enemyMaker.enemyDir == 1)
+        else if (enemyDir == 1)
         {
             transform.Translate(-enemySpd * Time.deltaTime, 0, 0);
         }
