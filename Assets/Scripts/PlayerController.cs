@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public Animator jumpAnim;
+    private Vector2 startMousePosition;
+    private Vector2 endMousePosition;
+    private Vector2 currentSwipe;
 
     RaycastHit hit;
     Transform hitPos;
@@ -124,6 +127,20 @@ public class PlayerController : MonoBehaviour
                         dir = direction.BACK;
                     }
                 }
+
+                // 마우스 버튼이 눌렸을 때
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startMousePosition = Input.mousePosition;
+                }
+
+                // 마우스 버튼이 떼어졌을 때
+                if (Input.GetMouseButtonUp(0))
+                {
+                    endMousePosition = Input.mousePosition;
+                    DetectSwipe();
+                }
+
             }
             else
             {
@@ -153,6 +170,65 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("게임 오버!!!");
                 StartCoroutine(gameOverManager.PlayerDeath(0.1f));
+            }
+        }
+    }
+    void DetectSwipe()
+    {
+        currentSwipe = new Vector2(endMousePosition.x - startMousePosition.x, endMousePosition.y - startMousePosition.y);
+
+        // 스와이프의 크기가 충분한지 확인
+        if (currentSwipe.magnitude < 50) // 이 값을 조정하여 최소 스와이프 거리를 설정
+        {
+            return;
+        }
+        currentSwipe.Normalize();
+
+        if (currentSwipe.x < 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
+        {
+            CheckOthers(Vector3.left);
+            if (!isBlock)
+            {
+                playerCharacter.transform.localRotation = Quaternion.Euler(0, -90f, 0);
+                originX = transform.position.x;
+                cameraMoving.originX = cameraMoving.transform.position.x;
+                isMoving = true;
+                dir = direction.LEFT;
+            }
+        }
+        else if (currentSwipe.x > 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
+        {
+            CheckOthers(Vector3.right);
+            if (!isBlock)
+            {
+                playerCharacter.transform.localRotation = Quaternion.Euler(0, 90f, 0);
+                originX = transform.position.x;
+                cameraMoving.originX = cameraMoving.transform.position.x;
+                isMoving = true;
+                dir = direction.RIGHT;
+            }
+        }
+        else if (currentSwipe.y > 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
+        {
+            CheckOthers(Vector3.forward);
+            if (!isBlock)
+            {
+                playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                z1 = tileMover.transform.position.z;
+                originZ = transform.position.z;
+                isMoving = true;
+                dir = direction.FRONT;
+            }
+        }
+        else if (currentSwipe.y < 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
+        {
+            CheckOthers(Vector3.back);
+            if (!isBlock)
+            {
+                playerCharacter.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+                originZ = transform.position.z;
+                isMoving = true;
+                dir = direction.BACK;
             }
         }
     }
