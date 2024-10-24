@@ -55,14 +55,16 @@ public class PlayerController : MonoBehaviour
         GameObject characterPrefab = Resources.Load(prefabPath) as GameObject;
 
         if (characterPrefab != null)
-        {           
+        {
             playerCharacter = Instantiate(characterPrefab, playerCharacter.transform.position, Quaternion.identity);
-            
+            Debug.Log(playerCharacter.transform.position.y);
+
             playerCharacter.transform.SetParent(transform);
             playerCharacter.transform.localPosition = new Vector3(0, 0, 0);
             playerCharacter.transform.localRotation = Quaternion.identity;
+            Debug.Log(playerCharacter.transform.position.y);
         }
-        //jumpAnim = playerCharacter.GetComponent<Animator>();
+        jumpAnim = playerCharacter.GetComponent<Animator>();
 
         tileMaker = GameObject.Find("TileMaker").GetComponent<TileMaker>();
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
@@ -234,7 +236,7 @@ public class PlayerController : MonoBehaviour
     }
     public void CheckOthers(Vector3 dir)
     {
-        //jumpAnim.SetTrigger("Jump");
+        jumpAnim.SetTrigger("Jump");
         if (Physics.Raycast(transform.position, transform.TransformDirection(dir), out hit, 1f))
         {
             Debug.Log(hit.transform.gameObject.name);

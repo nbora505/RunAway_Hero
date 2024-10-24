@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinCotroller : MonoBehaviour
 {
     public ScoreManager scoreManager;
+    public GameObject coinEffect;
 
     void Start()
     {
@@ -16,7 +17,18 @@ public class CoinCotroller : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             scoreManager.coin++;
-            Destroy(gameObject);
+            StartCoroutine(PlayCoinEffect());
         }
+    }
+
+    IEnumerator PlayCoinEffect()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetComponent<Collider>().enabled = false;
+
+        GameObject CoinLight = Instantiate<GameObject>(coinEffect, transform);
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject);
     }
 }
