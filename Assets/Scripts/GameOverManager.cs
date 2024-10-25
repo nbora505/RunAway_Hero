@@ -10,16 +10,19 @@ public class GameOverManager : MonoBehaviour
     public CameraMoving cameraMoving;
     public PlayerController playerController;
     public GameObject monster;
-
     public GameObject gameOverEffect;
+    public GameObject gameOverEffect2;
 
     public bool isDead;
+    int i;
+    GameObject Dragon;
 
     void Start()
     {
         cameraMoving = GameObject.Find("Camera").GetComponent<CameraMoving>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
+
 
     public IEnumerator PlayerDeath(float delay)
     {
@@ -43,13 +46,19 @@ public class GameOverManager : MonoBehaviour
     {
         isDead = true;
 
+        if (i == 0) Dragon = Instantiate<GameObject>(monster, new Vector3(player.transform.position.x, 0, -2), Quaternion.identity);
+        Animator monsterAppear = GameObject.Find("TimeOutMonster(Clone)").GetComponentInChildren<Animator>();
+        i++;
+
+        Dragon.transform.Translate(0, 0, 10f * Time.deltaTime);
+        monsterAppear.SetTrigger("PlayerDead");
+
         yield return new WaitForSeconds(delay);
-        //Æø¹ß ÀÌÆåÆ®
-        Debug.Log("Æã!!!!!!!!");
         cameraMoving.speed = 0;
         GetComponent<GameManager>().gameStart = false;
 
-        monster.transform.Translate(0, 0, 50f * Time.deltaTime);
+        GameObject Explosion = Instantiate<GameObject>(gameOverEffect2, new Vector3(player.transform.position.x, 0, 0), Quaternion.identity);
+
 
         yield return new WaitForSeconds(1f);
 

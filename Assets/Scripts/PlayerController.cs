@@ -179,12 +179,20 @@ public class PlayerController : MonoBehaviour
     {
         currentSwipe = new Vector2(endMousePosition.x - startMousePosition.x, endMousePosition.y - startMousePosition.y);
 
-        // 스와이프의 크기가 충분한지 확인
-        if (currentSwipe.magnitude < 50) // 이 값을 조정하여 최소 스와이프 거리를 설정
-        {
-            return;
-        }
         currentSwipe.Normalize();
+
+        if (currentSwipe.magnitude < 50)
+        {
+            CheckOthers(Vector3.forward);
+            if (!isBlock)
+            {
+                playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                z1 = tileMover.transform.position.z;
+                originZ = transform.position.z;
+                isMoving = true;
+                dir = direction.FRONT;
+            }
+        }
 
         if (currentSwipe.x < 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
         {

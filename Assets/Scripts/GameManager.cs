@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject win_gacha;
     public GameObject win_gacha_result;
     public GameObject optionPanel;
+    public GameObject AD;
 
     public bool gameStart;
     public int panelState;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         CP = characterPanel.GetComponent<Animator>();
         SP = shopPanel.GetComponent<Animator>();
+
     }
 
     void Update()
@@ -65,6 +67,16 @@ public class GameManager : MonoBehaviour
     {
         optionPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void OnADBtn()
+    {
+        AD.SetActive(true);
+    }
+    public void OnCloseADBtn()
+    {
+        AD.SetActive(false);
+        ScoreManager.Instance().GetCoinToAd();
     }
 
     public void OnGachaBackBtn()
