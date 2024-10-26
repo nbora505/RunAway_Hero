@@ -6,6 +6,7 @@ public class CoinCotroller : MonoBehaviour
 {
     public ScoreManager scoreManager;
     public GameObject coinEffect;
+    public AudioClip coinSfx;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class CoinCotroller : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             scoreManager.coin++;
+            AudioManager.Instance().PlaySfx(coinSfx);
             StartCoroutine(PlayCoinEffect());
         }
     }

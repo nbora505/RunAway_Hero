@@ -35,6 +35,7 @@ public class Win_Character : MonoBehaviour
     }
     public void OnCharacterSelectBtn()
     {
+        AudioManager.Instance().PlaySfx(GameManager.Instance().buttonSfx);
         Win_Character win_Character = GetComponent<Win_Character>();
         characterMgr.curChar = win_Character.curChar;
         Debug.Log(characterMgr.curChar);
@@ -44,6 +45,7 @@ public class Win_Character : MonoBehaviour
 }
     public void RBtn()
     {
+        AudioManager.Instance().PlaySfx(GameManager.Instance().buttonSfx);
         curChar++;
         if (curChar < 14)
         {
@@ -67,6 +69,7 @@ public class Win_Character : MonoBehaviour
 
     public void LBtn()
     {
+        AudioManager.Instance().PlaySfx(GameManager.Instance().buttonSfx);
         curChar--;
         if (curChar >= 0)
         {
@@ -84,6 +87,7 @@ public class Win_Character : MonoBehaviour
     }
     public void OnBackBtn()
     {
+        AudioManager.Instance().PlaySfx(GameManager.Instance().buttonSfx);
         win_character.SetActive(false);
     }
 }

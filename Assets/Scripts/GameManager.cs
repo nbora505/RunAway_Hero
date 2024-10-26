@@ -36,8 +36,22 @@ public class GameManager : MonoBehaviour
     public CharacterManager characterManager;
     public GameObject win_character;
 
+    static GameManager _instance;
+    public bool isMain = true;
+    public AudioClip buttonSfx;
+
+    public static GameManager Instance()
+    {
+        return _instance;
+    }
+
     void Start()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         anim1 = startPanel.GetComponent<Animator>();
         anim2 = buttonPanel.GetComponent<Animator>();
 
@@ -60,33 +74,40 @@ public class GameManager : MonoBehaviour
 
     public void OnOptionBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         optionPanel.SetActive(true);
         Time.timeScale = 0f;
     }
     public void OnCloseOptionBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         optionPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void OnADBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         AD.SetActive(true);
     }
     public void OnCloseADBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         AD.SetActive(false);
         ScoreManager.Instance().GetCoinToAd();
     }
 
     public void OnGachaBackBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         win_gacha_result.SetActive(false);
         win_gacha.SetActive(false);
     }
 
     public void OnCharacterPanelBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
+        isMain = false;
         startPanel.SetActive(false);
         CP.SetTrigger("Appear");
         if(panelState != 0) SP.SetTrigger("Disappear");
@@ -95,6 +116,8 @@ public class GameManager : MonoBehaviour
     }
     public void OnShopPanelBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
+        isMain = false;
         startPanel.SetActive(false);
         SP.SetTrigger("Appear");
         if (panelState != 0) CP.SetTrigger("Disappear");
@@ -104,6 +127,7 @@ public class GameManager : MonoBehaviour
 
     public void OnStartBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         anim1.SetTrigger("gameStart");
         anim2.SetTrigger("gameStart");
         StartCoroutine(WaitTime(0.5f));
@@ -115,6 +139,7 @@ public class GameManager : MonoBehaviour
 
     public void OnReStartBtn()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         startPanel.SetActive(false);
         startPanel.SetActive(true);
         anim1.SetTrigger("reStart");
@@ -122,6 +147,7 @@ public class GameManager : MonoBehaviour
     }
     public void CardSelect()
     {
+        AudioManager.Instance().PlaySfx(buttonSfx);
         Win_Character win_Character = win_character.GetComponent<Win_Character>();
         GameObject clickObject = EventSystem.current.currentSelectedGameObject;
         win_Character.curChar = int.Parse(clickObject.name);

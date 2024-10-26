@@ -26,7 +26,10 @@ public class EnemyMaker : MonoBehaviour
     public int tileType;
 
     public GameObject coin;
+    public AudioClip carSfx;
+    public AudioClip cautionSfx;
 
+    int i,j;
     void Awake()
     {
 
@@ -106,12 +109,16 @@ public class EnemyMaker : MonoBehaviour
             if (curTime >= 10f && curTime < 11f)
             {
                 //°æ°í
+                if(j == 0 && GameManager.Instance().isMain) AudioManager.Instance().PlaySfx(cautionSfx);
+                j++;
                 warning.SetActive(true);
             }
 
             if (curTime >= 11f && curTime < 12f)
             {
                 warning.SetActive(false);
+                if (i == 0 && GameManager.Instance().isMain) AudioManager.Instance().PlaySfx(carSfx);
+                i++;
 
                 miniCurTime += Time.deltaTime;
                 if (miniCurTime > enemyCool)
@@ -123,7 +130,12 @@ public class EnemyMaker : MonoBehaviour
                     enemy.transform.localScale = new Vector3(1f, 1f, 1f);
                     enemy.transform.parent = this.transform;
                 }
-            } else if (curTime >= 12f) curTime = 0;
+            }
+            else if (curTime >= 12f)
+            {
+                curTime = 0;
+                i = 0; j = 0;
+            }
         }
     }
 

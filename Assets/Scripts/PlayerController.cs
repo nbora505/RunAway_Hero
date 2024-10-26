@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
         BACK
     }
 
+    public AudioClip jumpSfx;
     public Animator jumpAnim;
     private Vector2 startMousePosition;
     private Vector2 endMousePosition;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameMgr").GetComponent<GameManager>();
         scoreManager = GameObject.Find("ScoreMgr").GetComponent<ScoreManager>();
         characterManager = GameObject.Find("CharacterMgr").GetComponent<CharacterManager>();
+
     }
 
     void Update()
@@ -181,70 +183,74 @@ public class PlayerController : MonoBehaviour
 
         currentSwipe.Normalize();
 
-        if (currentSwipe.magnitude < 50)
+        if (startMousePosition.y < 1500)
         {
-            CheckOthers(Vector3.forward);
-            if (!isBlock)
+            if (currentSwipe.magnitude < 50)
             {
-                playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                z1 = tileMover.transform.position.z;
-                originZ = transform.position.z;
-                isMoving = true;
-                dir = direction.FRONT;
+                CheckOthers(Vector3.forward);
+                if (!isBlock)
+                {
+                    playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    z1 = tileMover.transform.position.z;
+                    originZ = transform.position.z;
+                    isMoving = true;
+                    dir = direction.FRONT;
+                }
             }
-        }
 
-        if (currentSwipe.x < 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
-        {
-            CheckOthers(Vector3.left);
-            if (!isBlock)
+            if (currentSwipe.x < 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
             {
-                playerCharacter.transform.localRotation = Quaternion.Euler(0, -90f, 0);
-                originX = transform.position.x;
-                cameraMoving.originX = cameraMoving.transform.position.x;
-                isMoving = true;
-                dir = direction.LEFT;
+                CheckOthers(Vector3.left);
+                if (!isBlock)
+                {
+                    playerCharacter.transform.localRotation = Quaternion.Euler(0, -90f, 0);
+                    originX = transform.position.x;
+                    cameraMoving.originX = cameraMoving.transform.position.x;
+                    isMoving = true;
+                    dir = direction.LEFT;
+                }
             }
-        }
-        else if (currentSwipe.x > 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
-        {
-            CheckOthers(Vector3.right);
-            if (!isBlock)
+            else if (currentSwipe.x > 0 && Mathf.Abs(currentSwipe.x) > Mathf.Abs(currentSwipe.y))
             {
-                playerCharacter.transform.localRotation = Quaternion.Euler(0, 90f, 0);
-                originX = transform.position.x;
-                cameraMoving.originX = cameraMoving.transform.position.x;
-                isMoving = true;
-                dir = direction.RIGHT;
+                CheckOthers(Vector3.right);
+                if (!isBlock)
+                {
+                    playerCharacter.transform.localRotation = Quaternion.Euler(0, 90f, 0);
+                    originX = transform.position.x;
+                    cameraMoving.originX = cameraMoving.transform.position.x;
+                    isMoving = true;
+                    dir = direction.RIGHT;
+                }
             }
-        }
-        else if (currentSwipe.y > 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
-        {
-            CheckOthers(Vector3.forward);
-            if (!isBlock)
+            else if (currentSwipe.y > 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
             {
-                playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                z1 = tileMover.transform.position.z;
-                originZ = transform.position.z;
-                isMoving = true;
-                dir = direction.FRONT;
+                CheckOthers(Vector3.forward);
+                if (!isBlock)
+                {
+                    playerCharacter.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    z1 = tileMover.transform.position.z;
+                    originZ = transform.position.z;
+                    isMoving = true;
+                    dir = direction.FRONT;
+                }
             }
-        }
-        else if (currentSwipe.y < 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
-        {
-            CheckOthers(Vector3.back);
-            if (!isBlock)
+            else if (currentSwipe.y < 0 && Mathf.Abs(currentSwipe.y) > Mathf.Abs(currentSwipe.x))
             {
-                playerCharacter.transform.localRotation = Quaternion.Euler(0, 180f, 0);
-                originZ = transform.position.z;
-                isMoving = true;
-                dir = direction.BACK;
+                CheckOthers(Vector3.back);
+                if (!isBlock)
+                {
+                    playerCharacter.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+                    originZ = transform.position.z;
+                    isMoving = true;
+                    dir = direction.BACK;
+                }
             }
         }
     }
     public void CheckOthers(Vector3 dir)
     {
         jumpAnim.SetTrigger("Jump");
+        AudioManager.Instance().PlaySfx(jumpSfx);
         if (Physics.Raycast(transform.position, transform.TransformDirection(dir), out hit, 1f))
         {
             Debug.Log(hit.transform.gameObject.name);

@@ -973,6 +973,8 @@ MonoBehaviour:
   tileMaker: {fileID: 0}
   tileType: 0
   coin: {fileID: 5995811486012685645, guid: 288b3d902c9ead24ba505982816bb59f, type: 3}
+  carSfx: {fileID: 8300000, guid: 076484d5b8486764c85db60593296b72, type: 3}
+  cautionSfx: {fileID: 8300000, guid: 6dced1b55f0f93442bd4c7337bb04147, type: 3}
 --- !u!114 &-844801223133862881
 MonoBehaviour:
   m_ObjectHideFlags: 0

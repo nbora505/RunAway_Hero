@@ -13,8 +13,12 @@ public class GameOverManager : MonoBehaviour
     public GameObject gameOverEffect;
     public GameObject gameOverEffect2;
 
+    public AudioClip deadSfx1;
+    public AudioClip deadSfx2;
+    public AudioClip gameOverSfx;
+
     public bool isDead;
-    int i;
+    int i,j,k;
     GameObject Dragon;
 
     void Start()
@@ -30,6 +34,7 @@ public class GameOverManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         //Æø¹ß ÀÌÆåÆ®
+        if (j == 0) AudioManager.Instance().PlaySfx(deadSfx1); j++;
         GameObject Spark = Instantiate<GameObject>(gameOverEffect, player.transform);
         cameraMoving.speed = 0;
         GetComponent<GameManager>().gameStart = false;
@@ -39,7 +44,7 @@ public class GameOverManager : MonoBehaviour
 
         gameOverPanel.SetActive(true);
         player.SetActive(false);
-
+        if(k == 0) AudioManager.Instance().PlaySfx(gameOverSfx); k++;
     }
 
     public IEnumerator TimeOutDeath(float delay)
@@ -58,13 +63,14 @@ public class GameOverManager : MonoBehaviour
         GetComponent<GameManager>().gameStart = false;
 
         GameObject Explosion = Instantiate<GameObject>(gameOverEffect2, new Vector3(player.transform.position.x, 0, 0), Quaternion.identity);
-
+        if(j == 0) AudioManager.Instance().PlaySfx(deadSfx2); j++;
 
         yield return new WaitForSeconds(1f);
 
         gameOverPanel.SetActive(true);
         player.SetActive(false);
-
+        if (k == 0) AudioManager.Instance().PlaySfx(gameOverSfx); k++;
+        AudioManager.Instance().GetComponent<AudioSource>().volume -= 0.1f;
     }
 
 
