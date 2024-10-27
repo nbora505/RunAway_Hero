@@ -9,7 +9,8 @@ public class CardManager : MonoBehaviour
     public Text cardName;
 
     public int cardNum;
-
+    public Sprite nullCharacter;
+    public Sprite imageCharacter;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class CardManager : MonoBehaviour
             cardName.color = Color.black;
             transform.GetComponent<Button>().enabled = false;
             transform.GetComponent<Image>().color = Color.gray;
+            transform.GetChild(1).GetComponent<Image>().sprite = nullCharacter;
         }
         else
         {
@@ -38,6 +40,7 @@ public class CardManager : MonoBehaviour
             transform.GetComponent<Image>().color = Color.white;
             cardName.text = characterMgr.characterName[cardNum];
             cardName.color = Color.white;
+            transform.GetChild(1).GetComponent<Image>().sprite = imageCharacter;
         }
     }
 }
