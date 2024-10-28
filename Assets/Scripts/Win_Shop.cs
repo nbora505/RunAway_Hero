@@ -12,6 +12,7 @@ public class Win_Shop : MonoBehaviour
     public GameObject cautionPanel;
 
     public Text coinText;
+    public int getCoin;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Win_Shop : MonoBehaviour
     public void GetCoinToPresent()
     {
         int rand = Random.Range(40, 251);
+        getCoin = rand;
 
         StartCoroutine(PresentEffect(rand));
 

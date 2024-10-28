@@ -114,8 +114,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6856296330549274369}
+  - component: {fileID: -5655320599032963229}
   - component: {fileID: -3666132861427558788}
-  - component: {fileID: -6789074944486988827}
   - component: {fileID: 6569306658280130071}
   - component: {fileID: 8612808118664096391}
   - component: {fileID: 7122764941072630603}
@@ -143,6 +143,19 @@ Transform:
   - {fileID: 3032826159179375104}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5655320599032963229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563609306608480100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24cd7118be6c01d4bb03479ae247fd73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cube: {fileID: 463376896416155655, guid: 8b6f48090a03a3942ae218f29cd1ea4f, type: 3}
 --- !u!114 &-3666132861427558788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,19 +182,8 @@ MonoBehaviour:
   tileMaker: {fileID: 0}
   tileType: 0
   coin: {fileID: 5995811486012685645, guid: 288b3d902c9ead24ba505982816bb59f, type: 3}
---- !u!114 &-6789074944486988827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563609306608480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24cd7118be6c01d4bb03479ae247fd73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cube: {fileID: 463376896416155655, guid: 8b6f48090a03a3942ae218f29cd1ea4f, type: 3}
+  carSfx: {fileID: 0}
+  cautionSfx: {fileID: 0}
 --- !u!33 &6569306658280130071
 MeshFilter:
   m_ObjectHideFlags: 0

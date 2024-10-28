@@ -9,9 +9,11 @@ public class Win_Character : MonoBehaviour
     public GameManager gameMgr;
     public string[] characterName = new string[14];
     public string[] characterDescription = new string[14];
+    public Sprite[] characterSprite = new Sprite[14];
 
     public Text cName;
     public Text cDescription;
+    public Image cImage;
 
     public int curChar;
 
@@ -25,13 +27,17 @@ public class Win_Character : MonoBehaviour
         {
             characterName[i] = characterMgr.characterName[i];
             characterDescription[i] = characterMgr.characterDescription[i];
+            characterSprite[i] = characterMgr.characterSprite[i];
         }
+
+        cImage.sprite = characterSprite[curChar];
     }
 
     void Update()
     {
         cName.text = characterName[curChar];
         cDescription.text = characterDescription[curChar];
+        cImage.sprite = characterSprite[curChar];
     }
     public void OnCharacterSelectBtn()
     {
@@ -53,6 +59,7 @@ public class Win_Character : MonoBehaviour
             {
                 cName.text = characterName[curChar];
                 cDescription.text = characterDescription[curChar];
+                cImage.sprite = characterSprite[curChar];
             }
             else
             {
@@ -64,6 +71,7 @@ public class Win_Character : MonoBehaviour
             curChar = 0;
             cName.text = characterName[curChar];
             cDescription.text = characterDescription[curChar];
+            cImage.sprite = characterSprite[curChar];
         }
     }
 
@@ -77,6 +85,7 @@ public class Win_Character : MonoBehaviour
             {
                 cName.text = characterName[curChar];
                 cDescription.text = characterDescription[curChar];
+                cImage.sprite = characterSprite[curChar];
             }
             else
             {

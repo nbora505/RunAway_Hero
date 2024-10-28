@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CharacterManager : MonoBehaviour
     public int _curChar;
 
     public GameObject win_Gacha;
+    public GameObject win_Character;
     public GameObject result;
 
     public int characterCnt;
@@ -28,6 +30,8 @@ public class CharacterManager : MonoBehaviour
     public List<Dictionary<string, object>> data;
     public string[] characterName = new string[14];
     public string[] characterDescription = new string[14];
+    public Sprite[] characterSprite = new Sprite[14];
+    public Image gachaResult;
 
     void Start()
     {
@@ -132,6 +136,7 @@ public class CharacterManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         result.SetActive(true);
+        gachaResult.sprite = characterSprite[rand];
         Debug.Log(rand+"¹ø Ä³¸¯ÅÍ È¹µæ!!");
     }
     void SetCharacterList()
