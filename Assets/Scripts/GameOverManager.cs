@@ -70,7 +70,7 @@ public class GameOverManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         player.SetActive(false);
         if (k == 0) AudioManager.Instance().PlaySfx(gameOverSfx); k++;
-        AudioManager.Instance().GetComponent<AudioSource>().volume -= 0.1f;
+        //AudioManager.Instance().GetComponent<AudioSource>().volume -= 0.1f;
     }
 
 
