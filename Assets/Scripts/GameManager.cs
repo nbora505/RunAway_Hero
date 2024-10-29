@@ -109,22 +109,30 @@ public class GameManager : MonoBehaviour
     public void OnCharacterPanelBtn()
     {
         AudioManager.Instance().PlaySfx(buttonSfx);
-        isMain = false;
-        startPanel.SetActive(false);
-        CP.SetTrigger("Appear");
-        if(panelState != 0) SP.SetTrigger("Disappear");
 
-        panelState = 1;
+        if(panelState != 1)
+        {
+            isMain = false;
+            startPanel.SetActive(false);
+            CP.SetTrigger("Appear");
+            if (panelState != 0) SP.SetTrigger("Disappear");
+
+            panelState = 1;
+        }
     }
     public void OnShopPanelBtn()
     {
         AudioManager.Instance().PlaySfx(buttonSfx);
-        isMain = false;
-        startPanel.SetActive(false);
-        SP.SetTrigger("Appear");
-        if (panelState != 0) CP.SetTrigger("Disappear");
 
-        panelState = 2;
+        if(panelState != 2)
+        {
+            isMain = false;
+            startPanel.SetActive(false);
+            SP.SetTrigger("Appear");
+            if (panelState != 0) CP.SetTrigger("Disappear");
+
+            panelState = 2;
+        }
     }
 
     public void OnStartBtn()

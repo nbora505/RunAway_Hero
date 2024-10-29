@@ -148,6 +148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_Regular_Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 3724266211364880732, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4099560782697896934, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -214,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube_Regular_Purple (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3724266211364880732, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4099560782697896934, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -279,6 +287,10 @@ PrefabInstance:
     - target: {fileID: 3724266211364880732, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
       propertyPath: m_Name
       value: Cube_Regular_Purple (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3724266211364880732, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4099560782697896934, guid: a9d541e09f51fb64cb716f1aab90a6c0, type: 3}
       propertyPath: m_LocalPosition.x
