@@ -7,14 +7,35 @@ public class Prologue : MonoBehaviour
 {
     public GameObject startPanel;
     public Animator animator;
+    public AudioClip buttonSfx;
+    AudioSource sfx;
 
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
         StartCoroutine(ReadingCartoon());
     }
     IEnumerator ReadingCartoon()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+
+        yield return new WaitForSeconds(2);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(1);
+        sfx.PlayOneShot(buttonSfx);
+        yield return new WaitForSeconds(3);
+
         StartCoroutine(MainGameLoad());
     }
 
